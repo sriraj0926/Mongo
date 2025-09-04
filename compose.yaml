@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+
+  mongo_backend:
+
+    build:
+      context: .
+      dockerfile: Backend/Dockerfile
+    ports:
+      - "8001:8001"
+    container_name: mongo_backend
+
