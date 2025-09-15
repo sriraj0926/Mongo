@@ -11,7 +11,6 @@ async def create_db(db_name: str):
     await db["__init__"].insert_one({"created": True})
     return {"message": f"Database '{db_name}' created"}
 
-
 @mongodb_router.post("/{db_name}/collections/")
 async def create_collection(db_name: str, collection_name: str = Form(...)):
     db = get_db(db_name)
@@ -25,7 +24,6 @@ async def create_collection(db_name: str, collection_name: str = Form(...)):
                 detail=f"Collection '{collection_name}' already exists in '{db_name}'"
             )
         raise HTTPException(status_code=500, detail=str(e))
-
 
 @mongodb_router.post("/{db_name}/collections/{collection_name}/subitems")
 async def add_subitem(
@@ -64,3 +62,5 @@ async def delete_subitem(db_name: str, collection_name: str, item_id: str):
     if result.deleted_count == 0:
         raise HTTPException(status_code=404, detail="Subitem not found")
     return {"message": f"Subitem deleted from '{collection_name}' in '{db_name}'"}
+
+print("doing something finally")
